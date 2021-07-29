@@ -11,7 +11,7 @@ http_interactions:
       - '*/*; q=0.5, application/xml'
       Accept-Encoding:
       - gzip, deflate
-      Access-Token:
+      Authorization:
       - 2AAABLblqZhC3HrDExRuNnTr9I-U3z2f2KtGloHKah3ccogCP4HzbN5XSbcKSlxNJDtNCVAq94pM*
       X-User-Email:
       - cthomas@railjumper.com

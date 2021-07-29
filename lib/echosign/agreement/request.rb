@@ -7,7 +7,7 @@ module Echosign::Request
   # @param user_email [String] Echosign user email
   # @return [Hash] Agreement response body
   def self.create_agreement(token, base_uri, body, user_id = nil, user_email = nil)
-    headers = { 'Access-Token' => token }
+    headers = { 'Authorization' => token }
     headers['X-User-Id'] = user_id unless user_id.nil?
     headers['X-User-Email'] = user_email unless user_email.nil?
     response = post(ENDPOINT.fetch(:agreement, base_uri), body, headers, json: true)
@@ -19,7 +19,7 @@ module Echosign::Request
   # @param token [String] Auth Token
   # @return [Hash] Agreements response body
   def self.get_agreements(token, base_uri)
-    headers = { 'Access-Token' => token }
+    headers = { 'Authorization' => token }
     response = get(ENDPOINT.fetch(:agreement, base_uri), headers)
     JSON.parse(response.body)
   end
@@ -30,7 +30,7 @@ module Echosign::Request
   # @param agreement_id [String] ID of agreement to retrieve info on.
   # @return [Hash] Agreement info response body
   def self.agreement_info(token, base_uri, agreement_id)
-    headers = { 'Access-Token' => token }
+    headers = { 'Authorization' => token }
     endpoint = "#{ENDPOINT.fetch(:agreement, base_uri)}/#{agreement_id}"
     response = get(endpoint, headers)
     JSON.parse(response.body)
@@ -42,7 +42,7 @@ module Echosign::Request
   # @param agreement_id [String] ID of agreement to retrieve info on.
   # @return [Hash] URL information for the eSign page of the agreement
   def self.agreement_signing_urls(token, base_uri, agreement_id)
-    headers = { 'Access-Token' => token }
+    headers = { 'Authorization' => token }
     endpoint = "#{ENDPOINT.fetch(:agreement, base_uri)}/#{agreement_id}/signingUrls"
     response = get(endpoint, headers)
     JSON.parse(response.body)
@@ -55,7 +55,7 @@ module Echosign::Request
   # @return [String] Raw bytes from document file
   def self.agreement_combined_pdf(token, base_uri, agreement_id, versionId, participantEmail,
                                   attachSupportingDocuments, auditReport)
-    headers = { 'Access-Token' => token }
+    headers = { 'Authorization' => token }
     endpoint = "#{ENDPOINT.fetch(:agreement, base_uri)}/#{agreement_id}/combinedDocument"
     endpoint << add_query(endpoint, "versionId=#{versionId}") unless versionId.nil?
     endpoint << add_query(endpoint, "participantEmail=#{participantEmail}") unless participantEmail.nil?
@@ -71,7 +71,7 @@ module Echosign::Request
   # @param agreement_id [String]  (REQUIRED)
   # @return [String] Raw bytes representing CSV file
   def self.agreement_form_data(token, base_uri, agreement_id)
-    headers = { 'Access-Token' => token }
+    headers = { 'Authorization' => token }
     endpoint = "#{ENDPOINT.fetch(:agreement, base_uri)}/#{agreement_id}/formData"
     response = get(endpoint, headers)
   end
@@ -82,7 +82,7 @@ module Echosign::Request
   # @param agreement_id [String] ID of agreement to retrieve info on.
   # @return [String] Raw bytes from document file
   def self.agreement_document_file(token, base_uri, agreement_id, document_id)
-    headers = { 'Access-Token' => token }
+    headers = { 'Authorization' => token }
     endpoint = "#{ENDPOINT.fetch(:agreement, base_uri)}/#{agreement_id}/documents/#{document_id}"
     response = get(endpoint, headers)
     response.body
@@ -94,7 +94,7 @@ module Echosign::Request
   # @param agreement_id [String] ID of agreement to retrieve info on.
   # @return [String] Raw bytes from audit pdf file
   def self.audit_trail_pdf(token, base_uri, agreement_id)
-    headers = { 'Access-Token' => token }
+    headers = { 'Authorization' => token }
     endpoint = "#{ENDPOINT.fetch(:agreement, base_uri)}/#{agreement_id}/auditTrail"
     response = get(endpoint, headers)
     response.body
@@ -110,7 +110,7 @@ module Echosign::Request
   #   provided, the latest version of the agreement is used.
   # @return [Hash] Agreement documents response body
   def self.agreement_documents(token, base_uri, agreement_id, recipient_email = nil, format = nil, version_id = nil)
-    headers = { 'Access-Token' => token }
+    headers = { 'Authorization' => token }
     endpoint = "#{ENDPOINT.fetch(:agreement, base_uri)}/#{agreement_id}/documents"
     endpoint << add_query(endpoint, "versionId=#{version_id}") unless version_id.nil?
     endpoint << add_query(endpoint, "participantEmail=#{recipient_email}") unless version_id.nil?
@@ -126,7 +126,7 @@ module Echosign::Request
   # @param request_body [Hash] Hash for Agreement status update
   # @return [Hash] Agreements response body
   def self.update_agreement_status(token, base_uri, agreement_id, request_body)
-    headers = { 'Access-Token' => token }
+    headers = { 'Authorization' => token }
     endpoint = "#{ENDPOINT.fetch(:agreement, base_uri)}/#{agreement_id}/status"
     response = put(endpoint, request_body.to_json, headers)
     JSON.parse(response.body)

@@ -10,6 +10,6 @@ RSpec.shared_context "shared client" do
   end
 
   before :each do
-    allow(Echosign::Request).to receive(:get_base_uris).and_return('api_access_point' => 'https://api.eu1.echosign.com/')
+    allow(Echosign::Request).to receive(:get_baseUris).and_return('api_access_point' => 'https://api.eu1.echosign.com/')
   end
 end

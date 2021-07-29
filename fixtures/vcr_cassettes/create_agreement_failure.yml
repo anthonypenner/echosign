@@ -5,10 +5,10 @@ http_interactions:
     uri: https://api.eu1.echosign.com/api/rest/v5/agreements
     body:
       encoding: UTF-8
-      string: '{"documentCreationInfo":{"fileInfos":[[{"documentURL":{"url":"http://findgoplayers.com/resume.pdf","mimeType":"application/pdf","name":"resume.pdf"}}]],"recipientSetInfos":[{"recipientSetMemberInfos":{"email":"goishi.san@gmail.com"},"recipientSetRole":"SIGNER"}],"signatureFlow":"SENDER_SIGNS_LAST","signatureType":"ESIGN","name":"Rumplestiltskin
+      string: '{"documentCreationInfo":{"fileInfos":[[{"documentURL":{"url":"http://findgoplayers.com/resume.pdf","mimeType":"application/pdf","name":"resume.pdf"}}]],"participantSetsInfo":[{"recipientSetMemberInfos":{"email":"goishi.san@gmail.com"},"recipientSetRole":"SIGNER"}],"signatureFlow":"SENDER_SIGNS_LAST","signatureType":"ESIGN","name":"Rumplestiltskin
         Contract"}}'
     headers:
-      Access-Token:
+      Authorization:
       - 3AAABLblqZhAN-cxVlpFIUv3XdlgqlyWF8qVbIWnUmmvkAB4u6yPBE50XAqTqzLNCjbWS8QKAZPdgYOaqZHv6EE5LEJOc5NOK
       Content-Type:
       - application/json

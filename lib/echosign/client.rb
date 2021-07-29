@@ -84,7 +84,7 @@ module Echosign
     #
     # Note: params will be prepended with token and base_uri before calling the ultimate method
     def request(method, *params)
-      @base_uri ||= Echosign::Request.get_base_uris(@token).fetch('api_access_point')
+      @base_uri ||= Echosign::Request.get_baseUris(@token).fetch('apiAccessPoint')
       Echosign::Request.send(method, @token, @base_uri, *params)
     end
   end # class Client

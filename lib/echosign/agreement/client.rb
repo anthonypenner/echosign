@@ -6,7 +6,7 @@ module Echosign
     # @return [String] Agreement ID
     def create_agreement(agreement)
       agreement_response = request(:create_agreement, agreement, agreement.user_id, agreement.user_email)
-      return agreement_response['agreementId'] if agreement_response.has_key?('agreementId')
+      return agreement_response['id'] if agreement_response.has_key?('id')
 
       raise "Error creating agreement - response was #{agreement_response}"
     end

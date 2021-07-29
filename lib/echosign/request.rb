@@ -14,7 +14,7 @@ module Echosign::Request
   end
 
   BASE_URL  = 'https://api.echosign.com/'
-  BASE_PATH = 'api/rest/v5'
+  BASE_PATH = 'api/rest/v6'
 
   class EndpointHash
     def initialize(paths)
@@ -24,7 +24,7 @@ module Echosign::Request
     # Get an endpoint by name, using the given base_uri
     #
     # @param endpoint [Symbol] A legal endpoint name, as a symbol
-    # @param base_uri [String] A URI that was retrieved from the base_uris API
+    # @param base_uri [String] A URI that was retrieved from the baseUris API
     # @return [String] Returns a URL for the endpoint that begins with the base_uri
     def fetch(endpoint, base_uri)
       File.join(base_uri, BASE_PATH, @paths.fetch(endpoint))
@@ -32,7 +32,7 @@ module Echosign::Request
   end
 
   ENDPOINT = EndpointHash.new({
-                                base_uri: '/base_uris',
+                                base_uri: '/baseUris',
                                 transientDocument: '/transientDocuments',
                                 agreement: '/agreements',
                                 reminder: '/reminders',
@@ -46,9 +46,9 @@ module Echosign::Request
                                 megaSign: '/megaSigns',
                               }).freeze
 
-  def self.get_base_uris(token)
+  def self.get_baseUris(token)
     endpoint = ENDPOINT.fetch(:base_uri, BASE_URL)
-    headers = { 'Access-Token' => token }
+    headers = { 'Authorization' => token }
     response = get(endpoint, headers)
     JSON.parse(response.body)
   end
@@ -60,7 +60,7 @@ module Echosign::Request
   # @return [Hash] New user response body
   def self.create_user(token, base_uri, body)
     endpoint = ENDPOINT.fetch(:user, base_uri)
-    headers = { 'Access-Token' => token }
+    headers = { 'Authorization' => token }
     response = post(endpoint, body, headers)
     JSON.parse(response.body)
   end
@@ -72,7 +72,7 @@ module Echosign::Request
   # @return [Hash] Response body
   def self.create_reminder(token, base_uri, body)
     endpoint = ENDPOINT.fetch(:reminder, base_uri)
-    headers = { 'Access-Token' => token }
+    headers = { 'Authorization' => token }
     response = post(endpoint, body, headers)
     JSON.parse(response.body)
   end
@@ -85,7 +85,7 @@ module Echosign::Request
   # @param mime_type [String] Mime type
   # @return [Hash] Transient Document Response Body
   def self.create_transient_document(token, base_uri, file_name, file_handle, mime_type = nil)
-    headers = { 'Access-Token' => token }
+    headers = { 'Authorization' => token }
     if file_handle.is_a?(String)
       raise "Cannot find file: #{file_handle}" unless File.exist?(file_handle)
 
@@ -103,7 +103,7 @@ module Echosign::Request
   # @param user_email [String] The email address of the user whose details are being requested.
   # @return [Hash] User info hash
   def self.get_users(token, base_uri, user_email)
-    headers = { 'Access-Token' => token }
+    headers = { 'Authorization' => token }
     endpoint = "#{ENDPOINT.fetch(:user, base_uri)}?x-user-email=#{user_email}"
     response = get(endpoint, headers)
     JSON.parse(response.body)
@@ -115,7 +115,7 @@ module Echosign::Request
   # @param user_id [String]
   # @return [Hash] User info hash
   def self.get_user(token, base_uri, user_id)
-    headers = { 'Access-Token' => token }
+    headers = { 'Authorization' => token }
     endpoint = "#{ENDPOINT.fetch(:user, base_uri)}/#{user_id}"
     response = get(endpoint, headers)
     JSON.parse(response.body)

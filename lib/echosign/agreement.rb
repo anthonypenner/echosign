@@ -19,7 +19,7 @@ module Echosign
     #   for signature. If more than one file is provided, they will be combined into one PDF before being sent out.
     #   Note: Only one of the four parameters in every FileInfo object must be specified.  Populate the array with
     #   instances of {Echosign::Fileinfo Echosign::Fileinfo} (REQUIRED)
-    # @option params [Array] :recipientSetInfos A list of one or more recipients. For regular (non-MegaSign)
+    # @option params [Array] :participantSetsInfo A list of one or more recipients. For regular (non-MegaSign)
     #   documents, there is no limit on the number of electronic signatures in a single document. Written signatures
     #   are limited to four per document. This limit includes the sender if the sender's signature is also required.
     #    Populate the array with instances of {Echosign::Recipient Echosign::Recipient} (REQUIRED)
@@ -38,13 +38,13 @@ module Echosign
       @user_email = user_email
       # TODO (cthomas) barf if user_id or user_email are blank
       if params.has_key?(:recipients)
-        warn("NOTE: :recipients param in #{self.class}.new is deprecated; use :recipientSetInfos instead.\n" +
+        warn("NOTE: :recipients param in #{self.class}.new is deprecated; use :participantSetsInfo instead.\n" +
              "#{self.class}.new called from #{Gem.location_of_caller.join(":")}")
         params = params.dup
-        params[:recipientSetInfos] ||= params.delete :recipients
+        params[:participantSetsInfo] ||= params.delete :recipients
       end
-      require_keys([:signatureType, :recipientSetInfos, :signatureFlow, :fileInfos, :name], params)
-      merge!({ documentCreationInfo: params })
+      require_keys([:signatureType, :participantSetsInfo, :fileInfos, :name], params)
+      merge!(params)
     end
   end # class Agreement
 end # module Echosign

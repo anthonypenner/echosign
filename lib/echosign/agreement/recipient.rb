@@ -17,7 +17,7 @@ module Echosign
     def initialize(params)
       require_exactly_one([:email, :fax], params)
       email_or_fax = params[:email] ? { email: params[:email] } : { fax: params[:fax] }
-      merge!(recipientSetMemberInfos: email_or_fax, recipientSetRole: params[:role])
+      merge!(memberInfos: [email_or_fax], order: params[:order], role: params[:role])
     end
   end
 end

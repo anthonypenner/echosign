@@ -8,7 +8,7 @@ module Echosign::Request
   #   is inferred from the access token.
   # @return [Hash] Library documents metadata
   def self.get_library_documents(token, base_uri, user_id = nil, user_email = nil)
-    headers = { 'Access-Token' => token }
+    headers = { 'Authorization' => token }
     headers['X-User-Id'] = user_id unless user_id.nil?
     headers['X-User-Email'] = user_email unless user_email.nil?
     endpoint = ENDPOINT.fetch(:libraryDocument, base_uri)
@@ -22,7 +22,7 @@ module Echosign::Request
   # @param library_document_id [String]
   # @return [Hash] Library document metadata
   def self.get_library_document(token, base_uri, library_document_id)
-    headers = { 'Access-Token' => token }
+    headers = { 'Authorization' => token }
     endpoint = "#{ENDPOINT.fetch(:libraryDocument, base_uri)}/#{library_document_id}"
     response = get(endpoint, headers)
     JSON.parse(response.body)
@@ -34,7 +34,7 @@ module Echosign::Request
   # @param library_document_id [String] (REQUIRED)
   # @return [Hash] Library document files metadata
   def self.get_library_document_files(token, base_uri, library_document_id)
-    headers = { 'Access-Token' => token }
+    headers = { 'Authorization' => token }
     endpoint = "#{ENDPOINT.fetch(:libraryDocument, base_uri)}/#{library_document_id}/documents"
     response = get(endpoint, headers)
     JSON.parse(response.body)
@@ -47,7 +47,7 @@ module Echosign::Request
   # @param file_id [String] (REQUIRED)
   # @return [String] Library document file data
   def self.get_library_document_file(token, base_uri, library_document_id, file_id)
-    headers = { 'Access-Token' => token }
+    headers = { 'Authorization' => token }
     endpoint = "#{ENDPOINT.fetch(:libraryDocument, base_uri)}/#{library_document_id}/documents/#{file_id}"
     response = get(endpoint, headers)
   end
@@ -58,7 +58,7 @@ module Echosign::Request
   # @param library_document_id [String] (REQUIRED)
   # @return [String] Library document file data
   def self.library_document_audit_trail(token, base_uri, library_document_id)
-    headers = { 'Access-Token' => token }
+    headers = { 'Authorization' => token }
     endpoint = "#{ENDPOINT.fetch(:libraryDocument, base_uri)}/#{library_document_id}/auditTrail"
     response = get(endpoint, headers)
   end
@@ -69,7 +69,7 @@ module Echosign::Request
   # @param library_document_id [String] (REQUIRED)
   # @return [String] Raw library combined document file data
   def self.library_combined_document(token, base_uri, library_document_id, auditReport)
-    headers = { 'Access-Token' => token }
+    headers = { 'Authorization' => token }
     endpoint = "#{ENDPOINT.fetch(:libraryDocument, base_uri)}/#{library_document_id}/combinedDocument"
     endpoint << add_query(endpoint, "auditReport=#{auditReport}")
     response = get(endpoint, headers)

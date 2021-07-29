@@ -29,7 +29,7 @@ require 'echosign'
 credentials = Echosign::Credentials.new(app_id, app_secret)
 access_token = credentials.refresh_access_token(refresh_token)
 
-client = Echosign::Client.new(access_token)
+client = Echosign::Client.new("Bearer #{access_token}")
 ```
 
 #### Initializing a client with an authorization code
@@ -84,7 +84,7 @@ recipient_params = {
 
 agreement_info = {
      fileInfos:       [ Echosign::Fileinfo.new(file_info_params) ],
-     recipientSetInfos: [ Echosign::Recipient.new(recipient_params)],
+     participantSetsInfo: [ Echosign::Recipient.new(recipient_params)],
      signatureFlow:   "SENDER_SIGNS_LAST",
      signatureType:   "ESIGN",
      name:            "Rumplestiltskin Contract"

@@ -14,7 +14,7 @@ http_interactions:
       - gzip, deflate
       Content-Type:
       - application/json
-      Access-Token:
+      Authorization:
       - 2AAABLblqZhC3HrDExRuNnTr9I-U3z2f2KtGloHKah3ccogCP4HzbN5XSbcKSlxNJDtNCVAq94pM*
       Content-Length:
       - '118'

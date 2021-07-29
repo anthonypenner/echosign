@@ -7,7 +7,7 @@ module Echosign::Request
   # @param user_email [String] Echosign user email
   # @return [Hash] MegaSign response body
   def self.create_mega_sign(token, base_uri, body, user_id = nil, user_email = nil)
-    headers = { 'Access-Token' => token }
+    headers = { 'Authorization' => token }
     headers['X-User-Id'] = user_id unless user_id.nil?
     headers['X-User-Email'] = user_email unless user_email.nil?
     headers['Content-Type'] = "application/json"
@@ -21,7 +21,7 @@ module Echosign::Request
   # @param token [String] Auth Token
   # @return [Hash] MegaSigns response body
   def self.get_mega_signs(token, base_uri)
-    headers = { 'Access-Token' => token }
+    headers = { 'Authorization' => token }
     response = get(ENDPOINT.fetch(:megaSign, base_uri), headers)
     JSON.parse(response.body)
   end
@@ -32,7 +32,7 @@ module Echosign::Request
   # @param mega_sign_id [String] ID of mega_sign to retrieve info on.
   # @return [Hash] MegaSign info response body
   def self.mega_sign_info(token, base_uri, mega_sign_id)
-    headers = { 'Access-Token' => token }
+    headers = { 'Authorization' => token }
     endpoint = "#{ENDPOINT.fetch(:megaSign, base_uri)}/#{mega_sign_id}"
     response = get(endpoint, headers)
     JSON.parse(response.body)
@@ -44,7 +44,7 @@ module Echosign::Request
   # @param mega_sign_id [String] ID of mega_sign to retrieve info on.
   # @return [Hash] URL information for the eSign page of the mega_sign
   def self.mega_sign_signing_urls(token, base_uri, mega_sign_id)
-    headers = { 'Access-Token' => token }
+    headers = { 'Authorization' => token }
     endpoint = "#{ENDPOINT.fetch(:megaSign, base_uri)}/#{mega_sign_id}/signingUrls"
     response = get(endpoint, headers)
     JSON.parse(response.body)
@@ -57,7 +57,7 @@ module Echosign::Request
   # @return [String] Raw bytes from document file
   def self.mega_sign_combined_pdf(token, base_uri, mega_sign_id, versionId, participantEmail,
                                   attachSupportingDocuments, auditReport)
-    headers = { 'Access-Token' => token }
+    headers = { 'Authorization' => token }
     endpoint = "#{ENDPOINT.fetch(:megaSign, base_uri)}/#{mega_sign_id}/combinedDocument"
     endpoint << add_query(endpoint, "versionId=#{versionId}") unless versionId.nil?
     endpoint << add_query(endpoint, "participantEmail=#{participantEmail}") unless participantEmail.nil?
@@ -72,7 +72,7 @@ module Echosign::Request
   # @param mega_sign_id [String]  (REQUIRED)
   # @return [String] Raw bytes representing CSV file
   def self.mega_sign_form_data(token, base_uri, mega_sign_id)
-    headers = { 'Access-Token' => token }
+    headers = { 'Authorization' => token }
     endpoint = "#{ENDPOINT.fetch(:megaSign, base_uri)}/#{mega_sign_id}/formData"
     response = get(endpoint, headers)
   end
@@ -83,7 +83,7 @@ module Echosign::Request
   # @param mega_sign_id [String] ID of mega_sign to retrieve info on.
   # @return [String] Raw bytes from document file
   def self.mega_sign_document_file(token, base_uri, mega_sign_id, document_id)
-    headers = { 'Access-Token' => token }
+    headers = { 'Authorization' => token }
     endpoint = "#{ENDPOINT.fetch(:megaSign, base_uri)}/#{mega_sign_id}/documents/#{document_id}"
     response = get(endpoint, headers)
   end
@@ -94,7 +94,7 @@ module Echosign::Request
   # @param mega_sign_id [String] ID of mega_sign to retrieve info on.
   # @return [String] Raw bytes from audit pdf file
   def self.audit_trail_pdf(token, base_uri, mega_sign_id)
-    headers = { 'Access-Token' => token }
+    headers = { 'Authorization' => token }
     endpoint = "#{ENDPOINT.fetch(:megaSign, base_uri)}/#{mega_sign_id}/auditTrail"
     response = get(endpoint, headers)
   end
@@ -109,7 +109,7 @@ module Echosign::Request
   #   provided, the latest version of the mega_sign is used.
   # @return [Hash] MegaSign documents response body
   def self.mega_sign_documents(token, base_uri, mega_sign_id, recipient_email = nil, format = nil, version_id = nil)
-    headers = { 'Access-Token' => token }
+    headers = { 'Authorization' => token }
     endpoint = "#{ENDPOINT.fetch(:megaSign, base_uri)}/#{mega_sign_id}/documents"
     endpoint << add_query(endpoint, "versionId=#{version_id}") unless version_id.nil?
     endpoint << add_query(endpoint, "participantEmail=#{recipient_email}") unless version_id.nil?
@@ -125,7 +125,7 @@ module Echosign::Request
   # @param request_body [Hash] Hash for MegaSign status update
   # @return [Hash] MegaSigns response body
   def self.update_mega_sign_status(token, base_uri, mega_sign_id, request_body)
-    headers = { 'Access-Token' => token }
+    headers = { 'Authorization' => token }
     endpoint = "#{ENDPOINT.fetch(:megaSign, base_uri)}/#{mega_sign_id}/status"
     response = put(endpoint, request_body.to_json, headers)
     JSON.parse(response.body)

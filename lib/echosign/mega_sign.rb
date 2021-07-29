@@ -17,7 +17,7 @@ module Echosign
     #   for signature. If more than one file is provided, they will be combined into one PDF before being sent out.
     #   Note: Only one of the four parameters in every FileInfo object must be specified.  Populate the array with
     #   instances of {Echosign::Fileinfo Echosign::Fileinfo} (REQUIRED)
-    # @option params [Array] :recipientSetInfos A list of one or more recipients. For regular (non-MegaSign)
+    # @option params [Array] :participantSetsInfo A list of one or more recipients. For regular (non-MegaSign)
     #   documents, there is no limit on the number of electronic signatures in a single document. Written signatures
     #   are limited to four per document. This limit includes the sender if the sender's signature is also required.
     #    Populate the array with instances of {Echosign::Recipient Echosign::Recipient} (REQUIRED)
@@ -35,7 +35,7 @@ module Echosign
       @user_id = user_id
       @user_email = user_email
       # TODO (cthomas) barf if user_id or user_email are blank
-      require_keys([:signatureType, :recipientSetInfos, :signatureFlow, :fileInfos, :name], params)
+      require_keys([:signatureType, :participantSetsInfo, :signatureFlow, :fileInfos, :name], params)
       merge!({ megaSignCreationInfo: params })
     end
   end # class MegaSign

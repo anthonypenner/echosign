@@ -327,7 +327,7 @@ instances of <span class='object_link'><a href="Fileinfo.html" title="Echosign::
         </li>
       
         <li>
-          <span class="name">:recipientSetInfos</span>
+          <span class="name">:participantSetsInfo</span>
           <span class="type">(<tt>Array</tt>)</span>
           <span class="default">
             
@@ -418,7 +418,7 @@ the website. (REQUIRED)</p>
   <span class='ivar'>@user_id</span> <span class='op'>=</span> <span class='id identifier rubyid_user_id'>user_id</span>
   <span class='ivar'>@user_email</span> <span class='op'>=</span> <span class='id identifier rubyid_user_email'>user_email</span>
   <span class='comment'># TODO (cthomas) barf if user_id or user_email are blank
-</span>  <span class='id identifier rubyid_require_keys'>require_keys</span><span class='lparen'>(</span><span class='lbracket'>[</span><span class='symbol'>:signatureType</span><span class='comma'>,</span> <span class='symbol'>:recipientSetInfos</span><span class='comma'>,</span> <span class='symbol'>:signatureFlow</span><span class='comma'>,</span> <span class='symbol'>:fileInfos</span><span class='comma'>,</span> <span class='symbol'>:name</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
+</span>  <span class='id identifier rubyid_require_keys'>require_keys</span><span class='lparen'>(</span><span class='lbracket'>[</span><span class='symbol'>:signatureType</span><span class='comma'>,</span> <span class='symbol'>:participantSetsInfo</span><span class='comma'>,</span> <span class='symbol'>:signatureFlow</span><span class='comma'>,</span> <span class='symbol'>:fileInfos</span><span class='comma'>,</span> <span class='symbol'>:name</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_merge!'>merge!</span><span class='lparen'>(</span><span class='lbrace'>{</span> <span class='label'>megaSignCreationInfo:</span> <span class='id identifier rubyid_params'>params</span> <span class='rbrace'>}</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
