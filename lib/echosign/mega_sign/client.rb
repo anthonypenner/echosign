@@ -7,7 +7,7 @@ module Echosign
     def create_mega_sign(mega_sign)
       mega_sign_response = request(:create_mega_sign, mega_sign, mega_sign.user_id, mega_sign.user_email)
       puts mega_sign_response.inspect
-      mega_sign_response.fetch("mega_signId")
+      mega_sign_response.fetch("id")
     end
 
     # Gets list of mega_signs

@@ -35,8 +35,8 @@ module Echosign
       @user_id = user_id
       @user_email = user_email
       # TODO (cthomas) barf if user_id or user_email are blank
-      require_keys([:signatureType, :participantSetsInfo, :signatureFlow, :fileInfos, :name], params)
-      merge!({ megaSignCreationInfo: params })
+      require_keys([:signatureType, :signatureFlow, :fileInfos, :name], params)
+      merge!(params)
     end
   end # class MegaSign
 end # module Echosign
